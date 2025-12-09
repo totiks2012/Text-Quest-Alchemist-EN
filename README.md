@@ -34,13 +34,12 @@
 
 ## 🚀 Quick Start
 
-### Live Demo
-**[Open the Constructor](https://your_username.github.io/text-quest-alchemist/)**
+
 
 ### Local Installation
-```bash
-git clone https://github.com/your_username/text-quest-alchemist.git
-open index.html
+```
+open Alqhemist_QTG-v_4.2.html in any browser locally
+
 ```
 
 ## 📖 Create Your First Game
