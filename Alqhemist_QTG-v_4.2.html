@@ -1,0 +1,2136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 TEXT QUEST ALCHEMIST-04</title>
+    <style>
+        /* Styles remain unchanged */
+        :root {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --bg-tertiary: #3d3d3d;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --accent-primary: #9b59b6;
+            --accent-primary-hover: #8e44ad;
+            --accent-secondary: #3498db;
+            --accent-secondary-hover: #2980b9;
+            --accent-success: #27ae60;
+            --accent-success-hover: #219a52;
+            --accent-warning: #e67e22;
+            --accent-warning-hover: #d35400;
+            --accent-danger: #e74c3c;
+            --accent-danger-hover: #c0392b;
+            --accent-info: #1abc9c;
+            --accent-info-hover: #16a085;
+            --border-color: #404040;
+            --shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-tertiary: #e9ecef;
+            --text-primary: #2c3e50;
+            --text-secondary: #495057;
+            --accent-primary: #9b59b6;
+            --accent-primary-hover: #8e44ad;
+            --accent-secondary: #3498db;
+            --accent-secondary-hover: #2980b9;
+            --accent-success: #27ae60;
+            --accent-success-hover: #219a52;
+            --accent-warning: #e67e22;
+            --accent-warning-hover: #d35400;
+            --accent-danger: #e74c3c;
+            --accent-danger-hover: #c0392b;
+            --accent-info: #1abc9c;
+            --accent-info-hover: #16a085;
+            --border-color: #bdc3c7;
+            --shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            transition: background 0.3s ease;
+        }
+
+        [data-theme="light"] body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--bg-primary);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        /* Header */
+        .header {
+            background: var(--bg-secondary);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header h1 {
+            color: var(--text-primary);
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .header-subtitle {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        /* Toolbar */
+        .toolbar {
+            background: var(--bg-secondary);
+            padding: 15px 20px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+            border-bottom: 1px solid var(--border-color);
+            justify-content: center;
+        }
+
+        .toolbar-btn {
+            background: var(--accent-secondary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 120px;
+            justify-content: center;
+        }
+
+        .toolbar-btn:hover {
+            background: var(--accent-secondary-hover);
+            transform: translateY(-2px);
+        }
+
+        .toolbar-btn:active {
+            transform: translateY(0);
+        }
+
+        .toolbar-btn.idea { background: #e67e22; }
+        .toolbar-btn.idea:hover { background: #d35400; }
+        .toolbar-btn.genres { background: var(--accent-primary); }
+        .toolbar-btn.genres:hover { background: var(--accent-primary-hover); }
+        .toolbar-btn.locations { background: var(--accent-success); }
+        .toolbar-btn.locations:hover { background: var(--accent-success-hover); }
+        .toolbar-btn.artifacts { background: var(--accent-warning); }
+        .toolbar-btn.artifacts:hover { background: var(--accent-warning-hover); }
+        .toolbar-btn.mana { background: var(--accent-info); }
+        .toolbar-btn.mana:hover { background: var(--accent-info-hover); }
+        .toolbar-btn.heroes { background: #9b59b6; }
+        .toolbar-btn.heroes:hover { background: #8e44ad; }
+        .toolbar-btn.routes { background: #e74c3c; }
+        .toolbar-btn.routes:hover { background: #c0392b; }
+        .toolbar-btn.economy { background: #f39c12; }
+        .toolbar-btn.economy:hover { background: #e67e22; }
+        .toolbar-btn.summary { background: #8e44ad; }
+        .toolbar-btn.summary:hover { background: #7d3c98; }
+        .toolbar-btn.import { background: #3498db; }
+        .toolbar-btn.import:hover { background: #2980b9; }
+        .toolbar-btn.export { background: #f39c12; }
+        .toolbar-btn.export:hover { background: #e67e22; }
+        .toolbar-btn.reset { background: #e74c3c; }
+        .toolbar-btn.reset:hover { background: #c0392b; }
+        .toolbar-btn.save { background: #27ae60; }
+        .toolbar-btn.save:hover { background: #219a52; }
+
+        .theme-toggle {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-primary);
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .theme-toggle input {
+            display: none;
+        }
+
+        .toggle-slider {
+            width: 50px;
+            height: 24px;
+            background: var(--bg-tertiary);
+            border-radius: 12px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .toggle-slider::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s ease;
+        }
+
+        .theme-toggle input:checked + .toggle-slider::before {
+            transform: translateX(26px);
+        }
+
+        /* Main Area */
+        .main-area {
+            padding: 20px;
+            min-height: 500px;
+        }
+
+        .interview-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .interview-toggle label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .interview-toggle input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .interview-mode {
+            background: var(--accent-info);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* Settings Boards */
+        .board {
+            display: none;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .board.active {
+            display: block;
+            padding: 20px;
+            max-height: 600px;
+        }
+
+        .board-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .board-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .board-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .board-action-btn {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .board-action-btn:hover {
+            background: var(--border-color);
+        }
+
+        .board-action-btn.apply {
+            background: var(--accent-success);
+            color: white;
+        }
+
+        .board-action-btn.apply:hover {
+            background: var(--accent-success-hover);
+        }
+
+        .board-action-btn.clear {
+            background: var(--accent-danger);
+            color: white;
+        }
+
+        .board-action-btn.clear:hover {
+            background: var(--accent-danger-hover);
+        }
+
+        .preset-content {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.4;
+            color: var(--text-primary);
+            height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            resize: vertical;
+            width: 100%;
+        }
+
+        .preset-content:focus {
+            outline: none;
+            border-color: var(--accent-secondary);
+        }
+
+        .idea-input {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            font-family: inherit;
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-primary);
+            height: 400px;
+            width: 100%;
+            resize: vertical;
+        }
+
+        .idea-input:focus {
+            outline: none;
+            border-color: var(--accent-secondary);
+        }
+
+        .preset-comment {
+            color: #666;
+            font-style: italic;
+        }
+
+        .instruction {
+            background: var(--bg-tertiary);
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: var(--text-primary);
+            border-left: 4px solid var(--accent-info);
+        }
+
+        /* Output Area */
+        .output-section {
+            margin-top: 20px;
+            padding: 20px;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .output-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .output-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .output-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .output-action-btn {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .output-action-btn:hover {
+            background: var(--border-color);
+        }
+
+        .output-action-btn.copy {
+            background: var(--accent-success);
+            color: white;
+        }
+
+        .output-action-btn.copy:hover {
+            background: var(--accent-success-hover);
+        }
+
+        .output-action-btn.clear {
+            background: var(--accent-danger);
+            color: white;
+        }
+
+        .output-action-btn.clear:hover {
+            background: var(--accent-danger-hover);
+        }
+
+        .output-action-btn.export {
+            background: var(--accent-warning);
+            color: white;
+        }
+
+        .output-action-btn.export:hover {
+            background: var(--accent-warning-hover);
+        }
+
+        .output-content {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            min-height: 200px;
+            font-size: 14px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            color: var(--text-primary);
+            font-family: 'Courier New', monospace;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .status-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--accent-success);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .status-message.show {
+            transform: translateX(0);
+        }
+
+        .status-message.error {
+            background: var(--accent-danger);
+        }
+
+        @media (max-width: 768px) {
+            .toolbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .toolbar-btn {
+                justify-content: center;
+            }
+
+            .theme-toggle {
+                margin-left: 0;
+                justify-content: center;
+            }
+
+            .output-actions {
+                flex-direction: column;
+            }
+
+            body {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🎮 TEXT QUEST ALCHEMIST</h1>
+            <div class="header-subtitle">Constructor for endless text games with AI engine</div>
+        </div>
+
+        <!-- Toolbar -->
+        <div class="toolbar">
+            <button class="toolbar-btn idea" id="ideaBtn">
+                <span>💡</span>
+                Game Idea
+            </button>
+            <button class="toolbar-btn genres" id="genresBtn">
+                <span>🎭</span>
+                Genres
+            </button>
+            <button class="toolbar-btn locations" id="locationsBtn">
+                <span>🏰</span>
+                Locations
+            </button>
+            <button class="toolbar-btn routes" id="routesBtn">
+                <span>🛤️</span>
+                Routes
+            </button>
+            <button class="toolbar-btn artifacts" id="artifactsBtn">
+                <span>🔮</span>
+                Artifacts
+            </button>
+            <button class="toolbar-btn mana" id="manaBtn">
+                <span>⚡</span>
+                Mana
+            </button>
+            <button class="toolbar-btn heroes" id="heroesBtn">
+                <span>🦸</span>
+                Heroes & Enemies
+            </button>
+            <button class="toolbar-btn economy" id="economyBtn">
+                <span>💰</span>
+                Economy
+            </button>
+            <button class="toolbar-btn summary" id="summaryBtn">
+                <span>📋</span>
+                Summary
+            </button>
+            <button class="toolbar-btn import" id="importBtn">
+                <span>📥</span>
+                Import
+            </button>
+            <button class="toolbar-btn export" id="exportBtn">
+                <span>📤</span>
+                Export
+            </button>
+            <button class="toolbar-btn reset" id="resetBtn">
+                <span>🔄</span>
+                Reset
+            </button>
+            <button class="toolbar-btn save" id="saveBtn">
+                <span>💾</span>
+                Save
+            </button>
+
+            <label class="theme-toggle" id="themeToggle">
+                <input type="checkbox" id="themeCheckbox">
+                <span class="toggle-slider"></span>
+                <span>Light Theme</span>
+            </label>
+        </div>
+
+        <!-- Main Area -->
+        <div class="main-area">
+            <!-- Interview Mode Toggle -->
+            <div class="interview-toggle">
+                <label>
+                    <input type="checkbox" id="interviewModeCheckbox" checked>
+                    <span>✅ AI Interview Mode</span>
+                    <span class="interview-mode">INTERVIEW</span>
+                </label>
+            </div>
+
+            <!-- Settings Boards -->
+            <div class="board active" id="ideaBoard">
+                <div class="board-header">
+                    <div class="board-title">💡 General Game Idea</div>
+                    <div class="board-actions">
+                        <button class="board-action-btn apply" id="applyIdeaBtn">
+                            <span>✅</span>
+                            Apply
+                        </button>
+                        <button class="board-action-btn clear" id="clearIdeaBtn">
+                            <span>❌</span>
+                            Clear
+                        </button>
+                    </div>
+                </div>
+                <div class="instruction">
+                    💡 <strong>Describe your game's core concept:</strong> plot, main character, main objective, key themes, and atmosphere.
+                </div>
+                <textarea class="idea-input" id="ideaContent" placeholder="Describe your game concept... For example:
+
+A young mage discovers he has the rare ability to control time. He must stop an ancient evil that seeks to destroy the temporal continuum. Along the way, he meets allies and enemies, uncovers secrets of magical artifacts, and makes decisions that affect the fate of the entire world.
+
+Key themes: fate vs free will, the price of power, responsibility for one's actions.
+
+Atmosphere: epic fantasy with elements of mystery and moral choice."></textarea>
+            </div>
+
+            <div class="board" id="genresBoard">
+                <div class="board-header">
+                    <div class="board-title">🎭 Genre Settings</div>
+                    <div class="board-actions">
+                        <button class="board-action-btn apply" id="applyGenresBtn">
+                            <span>✅</span>
+                            Apply
+                        </button>
+                        <button class="board-action-btn clear" id="clearGenresBtn">
+                            <span>❌</span>
+                            Clear
+                        </button>
+                    </div>
+                </div>
+                <div class="instruction">
+                    💡 <strong>Instructions:</strong> Remove the # symbol at the beginning of a line to activate an element. Activated lines will be included in the final specification.
+                </div>
+                <textarea class="preset-content" id="genresContent"></textarea>
+            </div>
+
+            <div class="board" id="locationsBoard">
+                <div class="board-header">
+                    <div class="board-title">🏰 Locations and Threats Settings</div>
+                    <div class="board-actions">
+                        <button class="board-action-btn apply" id="applyLocationsBtn">
+                            <span>✅</span>
+                            Apply
+                        </button>
+                        <button class="board-action-btn clear" id="clearLocationsBtn">
+                            <span>❌</span>
+                            Clear
+                        </button>
+                    </div>
+                </div>
+                <div class="instruction">
+                    💡 <strong>Instructions:</strong> Remove the # symbol at the beginning of a line to activate an element. Location format: Name [Threat: X% | Enemy | Weakness]
+                </div>
+                <textarea class="preset-content" id="locationsContent"></textarea>
+            </div>
+
+            <div class="board" id="routesBoard">
+                <div class="board-header">
+                    <div class="board-title">🛤️ Location Chains and Routes</div>
+                    <div class="board-actions">
+                        <button class="board-action-btn apply" id="applyRoutesBtn">
+                            <span>✅</span>
+                            Apply
+                        </button>
+                        <button class="board-action-btn clear" id="clearRoutesBtn">
+                            <span>❌</span>
+                            Clear
+                        </button>
+                    </div>
+                </div>
+                <div class="instruction">
+                    💡 <strong>Create connected routes and location chains:</strong> Use → for linear paths, ⇄ for bidirectional, ⤴ for branching
+                </div>
+                <textarea class="preset-content" id="routesContent"></textarea>
+            </div>
+
+            <div class="board" id="artifactsBoard">
+                <div class="board-header">
+                    <div class="board-title">🔮 Artifacts Settings</div>
+                    <div class="board-actions">
+                        <button class="board-action-btn apply" id="applyArtifactsBtn">
+                            <span>✅</span>
+                            Apply
+                        </button>
+                        <button class="board-action-btn clear" id="clearArtifactsBtn">
+                            <span>❌</span>
+                            Clear
+                        </button>
+                    </div>
+                </div>
+                <div class="instruction">
+                    💡 <strong>Instructions:</strong> Remove the # symbol at the beginning of a line to activate an element. Activated lines will be included in the final specification.
+                </div>
+                <textarea class="preset-content" id="artifactsContent"></textarea>
+            </div>
+
+            <div class="board" id="manaBoard">
+                <div class="board-header">
+                    <div class="board-title">⚡ Mana System Settings</div>
+                    <div class="board-actions">
+                        <button class="board-action-btn apply" id="applyManaBtn">
+                            <span>✅</span>
+                            Apply
+                        </button>
+                        <button class="board-action-btn clear" id="clearManaBtn">
+                            <span>❌</span>
+                            Clear
+                        </button>
+                    </div>
+                </div>
+                <div class="instruction">
+                    💡 <strong>Instructions:</strong> Remove the # symbol at the beginning of a line to activate an element. Activated lines will be included in the final specification.
+                </div>
+                <textarea class="preset-content" id="manaContent"></textarea>
+            </div>
+
+            <div class="board" id="heroesBoard">
+                <div class="board-header">
+                    <div class="board-title">🦸 Hero and Enemies</div>
+                    <div class="board-actions">
+                        <button class="board-action-btn apply" id="applyHeroesBtn">
+                            <span>✅</span>
+                            Apply
+                        </button>
+                        <button class="board-action-btn clear" id="clearHeroesBtn">
+                            <span>❌</span>
+                            Clear
+                        </button>
+                    </div>
+                </div>
+                <div class="instruction">
+                    💡 <strong>Instructions:</strong> Remove the # symbol at the beginning of a line to activate an element. Activated lines will be included in the final specification.
+                </div>
+                <textarea class="preset-content" id="heroesContent"></textarea>
+            </div>
+
+            <div class="board" id="economyBoard">
+                <div class="board-header">
+                    <div class="board-title">💰 Economy and Combat System</div>
+                    <div class="board-actions">
+                        <button class="board-action-btn apply" id="applyEconomyBtn">
+                            <span>✅</span>
+                            Apply
+                        </button>
+                        <button class="board-action-btn clear" id="clearEconomyBtn">
+                            <span>❌</span>
+                            Clear
+                        </button>
+                    </div>
+                </div>
+                <div class="instruction">
+                    💡 <strong>Configure economy and combat mechanics:</strong> Currency, prices, rewards, combat system.
+                </div>
+                <textarea class="preset-content" id="economyContent"></textarea>
+            </div>
+
+            <div class="board" id="summaryBoard">
+                <div class="board-header">
+                    <div class="board-title">📋 Final AI Specification</div>
+                    <div class="board-actions">
+                        <button class="board-action-btn apply" id="generateTZBtn">
+                            <span>🎮</span>
+                            Assemble Spec
+                        </button>
+                        <button class="board-action-btn clear" id="clearSummaryBtn">
+                            <span>❌</span>
+                            Clear
+                        </button>
+                    </div>
+                </div>
+                <div class="output-content" id="summaryContent">
+// The assembled AI specification will be displayed here...
+Click "Assemble Spec" to generate the complete technical specification.
+                </div>
+            </div>
+
+            <!-- Output Area -->
+            <div class="output-section">
+                <div class="output-header">
+                    <div class="output-title">Generation Result:</div>
+                    <div class="output-actions">
+                        <button class="output-action-btn copy" id="copyOutputBtn">
+                            <span>📋</span>
+                            Copy Spec
+                        </button>
+                        <button class="output-action-btn clear" id="clearOutputBtn">
+                            <span>❌</span>
+                            Clear
+                        </button>
+                    </div>
+                </div>
+                <div class="output-content" id="outputContent">
+// The constructor's result will be displayed here...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="status-message" id="statusMessage"></div>
+
+    <!-- Hidden file input for import -->
+    <input type="file" id="fileInput" accept=".json" style="display: none;">
+
+    <script>
+        class QuestAlchemist {
+            constructor() {
+                this.saveTimeout = null;
+                this.DEBOUNCE_DELAY = 500;
+                this.currentBoard = 'idea';
+                this.fileInput = document.getElementById('fileInput');
+                
+                // Single source of data for all boards
+                this.boardTemplates = this.initializeBoardTemplates();
+
+                this.initializeElements();
+                this.attachEventListeners();
+                this.initializeBoards(); // Initialize boards from single source
+                this.loadFromStorage();
+                this.applyTheme();
+                this.showBoard(this.currentBoard);
+            }
+
+            // SINGLE SOURCE OF DATA FOR ALL BOARDS
+            initializeBoardTemplates() {
+                return {
+                    genres: `# === MAIN GENRES ===
+Instruct Interviewer to ask user about MAIN GENRES
+# To activate a genre - remove the # at the beginning of the line
+# Fantasy
+# Science Fiction
+# Cyberpunk
+# Horror
+# Detective
+# Romance
+# Adventure
+# Mystery
+
+# === HYBRIDS ===
+Instruct Interviewer to ask user about HYBRIDS
+# Activate hybrids by removing the #
+# Fantasy + Political Intrigue
+# Cyberpunk + Noir
+# Horror + Psychological Thriller
+# Science Fiction + Detective
+# Fantasy + Steampunk
+# Post-apocalyptic + Survival
+
+# === ATMOSPHERE SETTINGS ===
+Instruct Interviewer to ask user about ATMOSPHERE SETTINGS
+# Epic scale
+# Intimate story
+# Dark atmosphere
+# Humorous tone
+# Poetic style
+# Realistic approach
+
+# === YOUR OWN GENRES ===
+Instruct Interviewer to ask user about THEIR OWN GENRES
+# Write your unique combinations here (remove # to activate)
+# "Magical realism + Urban fantasy"
+# "Historical novel + Fantasy"`,
+
+                    locations: `# === LOCATION TYPES ===
+
+Instruct Interviewer to ask user about LOCATION TYPES, example Format: Name [Threat: X% | Enemy | Weakness]
+# Format: Name [Threat: X% | Enemy | Weakness]
+# Remove # to select location
+#Forest [Threat: 15% | Gray Wolf | Weakness: Fire]
+#City [Threat: 25% | Street Thugs | Weakness: Intimidation]
+#Dungeon [Threat: 60% | Skeleton Warrior | Weakness: Holy Magic]
+#Castle [Threat: 40% | Royal Guard | Weakness: Bribery]
+#Village [Threat: 10% | Village Fool | Weakness: Deception]
+#Mountains [Threat: 50% | Mountain Troll | Weakness: Agility]
+#Coast [Threat: 20% | Pirates | Weakness: Negotiation]
+#Desert [Threat: 35% | Sand Worm | Weakness: Water]
+#Swamp [Threat: 45% | Swamp Spirit | Weakness: Fire]
+#Ruins [Threat: 55% | Ancient Golem | Weakness: Magic]
+
+# === SPECIAL LOCATIONS ===
+Instruct Interviewer to ask user about SPECIAL LOCATIONS Activate special locations
+#Magic Tower [Threat: 70% | Archmage | Weakness: Counter-magic]
+#Ancient Temple [Threat: 80% | Cult Priest | Weakness: Mind]
+#Underground City [Threat: 65% | Dark Elves | Weakness: Light]
+#Flying Island [Threat: 75% | Sky Guardians | Weakness: Earth]
+#World Portals [Threat: 90% | Demon Guardian | Weakness: Sealing]
+
+# === CONNECTIONS BETWEEN LOCATIONS ===
+#If world is open, skip this point
+# These connections will be considered in game generation
+# Forest → Village → City → Castle
+# Dungeon ← Forest
+# Mountains → Caves → Ancient Temple
+# Port → Ship → Island
+
+# === LOCATION ATMOSPHERE ===
+# if world is open, better set through game mechanics interaction
+# Atmosphere descriptions for activated locations
+# Forest: mysterious, dangerous, picturesque
+# City: noisy, crowded, corrupt
+# Castle: majestic, ancient, haunted
+# Dungeon: dark, damp, full of traps`,
+
+                    routes: `# === BASIC ROUTES ===
+# if world is open, it should generate this itself
+# Linear chains (remove # to activate)
+# Port → Ship → Island → Jungle → Ancient Temple
+# Tavern → Dark Alley → Underworld → Thieves' Den
+# Magic Academy → Forbidden Library → Secret Portal → Demon Dimension
+
+# === BRANCHING PATHS ===
+# Routes with direction choices
+# Village ⤴ [Forest → Ruins] | [Mountains → Caves] | [River → Raft → Island]
+# Crossroads ⤴ [City of Therion] | [Abandoned Fortress] | [Magic Tower]
+
+# === CYCLICAL ROUTES ===
+# Castle ⇄ Secret Passages ⇄ Catacombs ⇄ Abandoned Temple
+# Space Station ⇄ Transport Shuttle ⇄ Asteroid Base
+
+# === DANGEROUS ZONES ===
+# Locations with increased encounter probability!
+# Dark Forest 💀 [Combat probability: 70%]
+# Criminal District 💀 [Encounter probability: 80%]
+# Mutant Territory 💀 [Attack probability: 90%]
+
+# === YOUR UNIQUE CHAINS ===
+# Create your own routes (remove # to activate)
+# Fishing Village → Boat → Lake → Sunken City → Portal to Atlantis
+# Cybercity → Metaverse → Neural Network → Artificial Intelligence → Machine Consciousness`,
+
+                    artifacts: `# === ARTIFACT TYPES ===
+Instruct Interviewer to ask user about ARTIFACT TYPES
+# Activate artifact types by removing #
+# Combat (increase damage, defense)
+# Magical (enhance spells)
+# Utility (open paths)
+# Plot (for main quest)
+# Legendary (unique, powerful)
+# Consumable (single-use)
+
+# === EXAMPLE ARTIFACTS ===
+# Specific artifacts for the game
+# "Fire Amulet: +10 to fire magic"
+# "Treasure Map: reveals hidden caches"
+# "Ancient Temple Key: access to secret area"
+# "Health Potion: restores 50 HP"
+# "Cloak of Invisibility: hides from enemies"
+# "Magic Staff: +20 to spell power"
+
+# === ACQUISITION SYSTEM ===
+Instruct Interviewer to ask user about ACQUISITION SYSTEM
+# How player will obtain artifacts
+# Found in chests
+# Purchased from merchants
+# Quest rewards
+# Created through crafting
+# Dropped by bosses
+
+# === LIMITATIONS ===
+Instruct Interviewer to ask user about ACQUISITION SYSTEM
+# Game balance mechanics
+# Maximum 6 artifacts in inventory
+# Some require specific level
+# Rare artifacts are unique`,
+
+                    mana: `# === MANA TYPES ===
+Instruct Interviewer to ask user about MANA TYPES
+# Select mana types for your game
+# Elemental (fire, water, air, earth)
+# Dark (necromancy, curses)
+# Light (healing, protection)
+# Chaotic (teleportation, illusions)
+# Nature (plants, animals)
+# Psychic (mind, emotions)
+
+# === MANA CHARACTERISTICS ===
+Instruct Interviewer to ask user about MANA CHARACTERISTICS
+# Basic system settings
+# Base pool: 100 units
+# Regeneration: 10 units/turn (natural)
+# Maximum: 200 units
+# Spell cost: 5-50 units
+
+# === SYSTEM RULES ===
+Instruct Interviewer to ask user about SYSTEM RULES
+# Main mana mechanics
+# Regeneration: natural + meditation
+# Effect: limits spells, enhances artifacts
+# Combinations: mixing mana types creates new effects
+# Limitations: some spells require specific level
+
+# === REGENERATION METHODS ===
+Instruct Interviewer to ask user about REGENERATION METHODS
+# How player can restore mana
+# Natural regeneration (slow)
+# Meditation (fast, requires time)
+# Mana potions (instant, limited)
+# Special locations (mana sources)`,
+
+                    heroes: `# === MAIN HERO ===
+Instruct Interviewer to ask user about MAIN HERO name, origin, character, motivation, weaknesses, features
+# Activate main hero characteristics
+# Name: Aelian - young mage with gift of foresight
+# Origin: orphan, raised in magic academy
+# Character: curious, compassionate, but indecisive
+# Motivation: find real parents and uncover origin mystery
+# Weaknesses: too trusting, fears making important decisions
+# Features: can see fragments of future in dreams
+
+# === HERO ABILITIES ===
+Instruct Interviewer to ask user about HERO ABILITIES
+# Basic skills and abilities
+# Elemental magic (fire, water, air, earth)
+# Healing and protection
+# Foresight (limited, requires much mana)
+# Negotiation and persuasion
+# Stealth and subtlety
+
+# === HERO DEVELOPMENT ===
+Instruct Interviewer to ask user about HERO DEVELOPMENT How hero will develop in game
+# Skill tree with branching
+# Moral choice affects abilities
+# Relationships with NPCs unlock new skills
+# Artifacts enhance specific abilities
+
+# === ENEMY TYPES ===
+Instruct Interviewer to ask user about ENEMY TYPES Activate enemy types for game
+# Bosses (unique, with special abilities)
+# Regular (standard opponents)
+# Neutral (can become allies)
+# Raid (very strong, for groups)
+# Mini-bosses (stronger than regular, weaker than bosses)
+
+# === EXAMPLE ENEMIES ===
+Instruct Interviewer to ask user about EXAMPLE ENEMIES Specific opponents and their features
+# "Dark Wizard Malkador: weak to light mana, seeks artifact of eternal life"
+# "Goblin Bandits: weak to fire magic, attack trade caravans"
+# "Ghosts of Forgotten Civilization: immune to physical attacks, guard ancient ruins"
+# "Flame Dragon: strong against all types except ice, protects its nest"
+# "Necromancer Zaratul: summons undead, seeks to create undead army"
+# "Vampire Aristocrat: regenerates health from bites, seeks ancient artifact"
+
+# === DIFFICULTY SYSTEM ===
+Instruct Interviewer to ask user about DIFFICULTY SYSTEM Balance and progression settings
+# Enemies become stronger with progress
+# Unique abilities for bosses
+# Weak spots for each enemy type
+# Possibility to avoid combat through dialogue
+
+# === VICTORY REWARDS ===
+Instruct Interviewer to ask user about VICTORY REWARDS What player gets for victory
+# Experience and gold
+# Rare artifacts from bosses
+# Key items for plot
+# Access to new locations
+# Reputation improvement with factions
+
+# === SPECIAL MECHANICS ===
+Instruct Interviewer to ask user about SPECIAL MECHANICS Additional interaction systems
+# Reputation system with various factions
+# Ability to recruit some enemies
+# Moral choice in dialogues with opponents
+# Alternative paths through persuasion`,
+
+                    economy: `# === ECONOMY ===
+Instruct Interviewer to ask user about ECONOMY Monetary system and trade
+# Main currency: gold coins
+# Alternative currencies: magic crystals, reputation
+# Income sources: quests, trade, defeating enemies
+# Expenses: equipment, potions, training, bribes
+
+# === PRICES AND TRADE ===
+Instruct Interviewer to ask user about PRICES AND TRADE Price balance in game
+# Health Potion: 50 gold
+# Mana Potion: 75 gold
+# Regular weapon: 100-300 gold
+# Magic weapon: 500-2000 gold
+# Rare artifacts: 5000+ gold
+# Training cost: 200 gold per level
+
+# === REWARD SYSTEM ===
+Instruct Interviewer to ask user about REWARD SYSTEM Rewards for completing quests
+# Minor quest: 100-300 gold
+# Medium quest: 400-800 gold
+# Major quest: 1000-2500 gold
+# Epic quest: 5000+ gold
+# Secrets discovery bonus: +50% reward
+
+# === COMBAT SYSTEM ===
+Instruct Interviewer to ask user about COMBAT SYSTEM Combat mechanics and characteristics
+# Base damage: 10-20 units
+# Critical hit: x2 damage (15% chance)
+# Defense: reduces received damage by 1-10 units
+# Initiative: determines turn order
+# Evasion: 20% chance to avoid attack
+
+# === CONFLICT RESOLUTION OPTIONS ===
+[1] [FIGHT] Direct attack (risk of injuries)
+[2] [NEGOTIATION] Persuade/deceive (requires charisma)
+[3] [STEALTH] Go unnoticed (requires agility)
+[4] [MAGIC] Use spells (mana cost)
+[5] [BRIBERY] Offer money/artifacts
+[6] [INTIMIDATION] Use reputation
+
+# === THREAT ACTIVATION MECHANICS ===
+Instruct Interviewer to ask user about THREAT ACTIVATION MECHANICS Encounter probability = Threat Level + Modifiers
+# Modifiers:
+# - Failed stealth: +20%
+# - Killing enemies: +10% to alertness
+# - Successful bribery: -30% for 2 turns
+# - Spy detection: +40% (chase)
+
+# === DYNAMIC ESCALATION ===
+
+- On stealth failure: +20% threat in all connected locations
+- Killing enemies: +10% to enemy alertness
+- Successful bribery: -30% threat in current zone for 2 turns
+- Spy detection: Triggers chase through 3 locations
+
+# === COMBAT MECHANICS ===
+Instruct Interviewer to ask user about COMBAT MECHANICS Combat system and characteristics Attack types: physical, magical, ranged, melee  Resistances: armor (physical), resists (magic)
+Status effects: stun, poison, burn, freeze
+ Critical hits: 15% chance, damage x2
+ Evasion: base 20% chance, depends on agility
+
+# === TACTICAL OPTIONS ===
+Instruct Interviewer to ask user about TACTICAL OPTIONS
+ Additional options in combat
+Defense: reduces received damage by 50% for 1 turn
+ Concentration: increases crit chance by 25% for next turn
+ Flee: attempt to avoid combat (60% chance)
+ Use items: potions, scrolls, consumable artifacts
+
+# === LEVELING AND PROGRESSION SYSTEM ===
+Instruct Interviewer to ask user about LEVELING AND PROGRESSION SYSTEM
+ Character development in combat
+ Experience per victory: 50-200 XP depending on opponent# Levels: maximum 50, with characteristic improvements
+ Characteristics: strength, agility, intelligence, endurance
+ Skills: passive and active abilities`
+                };
+            }
+
+            // INITIALIZE BOARDS FROM SINGLE SOURCE
+            initializeBoards() {
+                this.genresContent.value = this.boardTemplates.genres;
+                this.locationsContent.value = this.boardTemplates.locations;
+                this.routesContent.value = this.boardTemplates.routes;
+                this.artifactsContent.value = this.boardTemplates.artifacts;
+                this.manaContent.value = this.boardTemplates.mana;
+                this.heroesContent.value = this.boardTemplates.heroes;
+                this.economyContent.value = this.boardTemplates.economy;
+            }
+
+            initializeElements() {
+                // Toolbar elements
+                this.ideaBtn = document.getElementById('ideaBtn');
+                this.genresBtn = document.getElementById('genresBtn');
+                this.locationsBtn = document.getElementById('locationsBtn');
+                this.routesBtn = document.getElementById('routesBtn');
+                this.artifactsBtn = document.getElementById('artifactsBtn');
+                this.manaBtn = document.getElementById('manaBtn');
+                this.heroesBtn = document.getElementById('heroesBtn');
+                this.economyBtn = document.getElementById('economyBtn');
+                this.summaryBtn = document.getElementById('summaryBtn');
+                this.importBtn = document.getElementById('importBtn');
+                this.exportBtn = document.getElementById('exportBtn');
+                this.resetBtn = document.getElementById('resetBtn');
+                this.saveBtn = document.getElementById('saveBtn');
+
+                // Boards
+                this.ideaBoard = document.getElementById('ideaBoard');
+                this.genresBoard = document.getElementById('genresBoard');
+                this.locationsBoard = document.getElementById('locationsBoard');
+                this.routesBoard = document.getElementById('routesBoard');
+                this.artifactsBoard = document.getElementById('artifactsBoard');
+                this.manaBoard = document.getElementById('manaBoard');
+                this.heroesBoard = document.getElementById('heroesBoard');
+                this.economyBoard = document.getElementById('economyBoard');
+                this.summaryBoard = document.getElementById('summaryBoard');
+
+                // Board content
+                this.ideaContent = document.getElementById('ideaContent');
+                this.genresContent = document.getElementById('genresContent');
+                this.locationsContent = document.getElementById('locationsContent');
+                this.routesContent = document.getElementById('routesContent');
+                this.artifactsContent = document.getElementById('artifactsContent');
+                this.manaContent = document.getElementById('manaContent');
+                this.heroesContent = document.getElementById('heroesContent');
+                this.economyContent = document.getElementById('economyContent');
+                this.summaryContent = document.getElementById('summaryContent');
+
+                // Action buttons
+                this.applyIdeaBtn = document.getElementById('applyIdeaBtn');
+                this.clearIdeaBtn = document.getElementById('clearIdeaBtn');
+                this.applyGenresBtn = document.getElementById('applyGenresBtn');
+                this.clearGenresBtn = document.getElementById('clearGenresBtn');
+                this.applyLocationsBtn = document.getElementById('applyLocationsBtn');
+                this.clearLocationsBtn = document.getElementById('clearLocationsBtn');
+                this.applyRoutesBtn = document.getElementById('applyRoutesBtn');
+                this.clearRoutesBtn = document.getElementById('clearRoutesBtn');
+                this.applyArtifactsBtn = document.getElementById('applyArtifactsBtn');
+                this.clearArtifactsBtn = document.getElementById('clearArtifactsBtn');
+                this.applyManaBtn = document.getElementById('applyManaBtn');
+                this.clearManaBtn = document.getElementById('clearManaBtn');
+                this.applyHeroesBtn = document.getElementById('applyHeroesBtn');
+                this.clearHeroesBtn = document.getElementById('clearHeroesBtn');
+                this.applyEconomyBtn = document.getElementById('applyEconomyBtn');
+                this.clearEconomyBtn = document.getElementById('clearEconomyBtn');
+                this.generateTZBtn = document.getElementById('generateTZBtn');
+                this.clearSummaryBtn = document.getElementById('clearSummaryBtn');
+
+                // Output elements
+                this.outputContent = document.getElementById('outputContent');
+                this.copyOutputBtn = document.getElementById('copyOutputBtn');
+                this.clearOutputBtn = document.getElementById('clearOutputBtn');
+
+                // Helper elements
+                this.statusMessage = document.getElementById('statusMessage');
+                this.themeToggle = document.getElementById('themeToggle');
+                this.themeCheckbox = document.getElementById('themeCheckbox');
+                this.interviewModeCheckbox = document.getElementById('interviewModeCheckbox');
+            }
+
+            attachEventListeners() {
+                // Board switching buttons
+                this.ideaBtn.addEventListener('click', () => this.showBoard('idea'));
+                this.genresBtn.addEventListener('click', () => this.showBoard('genres'));
+                this.locationsBtn.addEventListener('click', () => this.showBoard('locations'));
+                this.routesBtn.addEventListener('click', () => this.showBoard('routes'));
+                this.artifactsBtn.addEventListener('click', () => this.showBoard('artifacts'));
+                this.manaBtn.addEventListener('click', () => this.showBoard('mana'));
+                this.heroesBtn.addEventListener('click', () => this.showBoard('heroes'));
+                this.economyBtn.addEventListener('click', () => this.showBoard('economy'));
+                this.summaryBtn.addEventListener('click', () => this.showBoard('summary'));
+
+                // Action buttons
+                this.applyIdeaBtn.addEventListener('click', () => this.applyBoardSettings('idea'));
+                this.clearIdeaBtn.addEventListener('click', () => this.clearBoard('idea'));
+                this.applyGenresBtn.addEventListener('click', () => this.applyBoardSettings('genres'));
+                this.clearGenresBtn.addEventListener('click', () => this.clearBoard('genres'));
+                this.applyLocationsBtn.addEventListener('click', () => this.applyBoardSettings('locations'));
+                this.clearLocationsBtn.addEventListener('click', () => this.clearBoard('locations'));
+                this.applyRoutesBtn.addEventListener('click', () => this.applyBoardSettings('routes'));
+                this.clearRoutesBtn.addEventListener('click', () => this.clearBoard('routes'));
+                this.applyArtifactsBtn.addEventListener('click', () => this.applyBoardSettings('artifacts'));
+                this.clearArtifactsBtn.addEventListener('click', () => this.clearBoard('artifacts'));
+                this.applyManaBtn.addEventListener('click', () => this.applyBoardSettings('mana'));
+                this.clearManaBtn.addEventListener('click', () => this.clearBoard('mana'));
+                this.applyHeroesBtn.addEventListener('click', () => this.applyBoardSettings('heroes'));
+                this.clearHeroesBtn.addEventListener('click', () => this.clearBoard('heroes'));
+                this.applyEconomyBtn.addEventListener('click', () => this.applyBoardSettings('economy'));
+                this.clearEconomyBtn.addEventListener('click', () => this.clearBoard('economy'));
+                this.generateTZBtn.addEventListener('click', () => this.generateTZ());
+                this.clearSummaryBtn.addEventListener('click', () => this.clearOutput());
+
+                // Main buttons
+                this.importBtn.addEventListener('click', () => this.importSRC());
+                this.exportBtn.addEventListener('click', () => this.exportSRC());
+                this.resetBtn.addEventListener('click', () => this.resetAll());
+                this.saveBtn.addEventListener('click', () => this.saveToStorage());
+                this.copyOutputBtn.addEventListener('click', () => this.copyToClipboard());
+                this.clearOutputBtn.addEventListener('click', () => this.clearOutput());
+
+                // File import handler
+                this.fileInput.addEventListener('change', (e) => this.handleFileImport(e));
+
+                // Change listeners
+                this.themeCheckbox.addEventListener('change', () => this.toggleTheme());
+                this.interviewModeCheckbox.addEventListener('change', () => this.saveToStorage());
+
+                // Input listeners for autosave
+                this.ideaContent.addEventListener('input', () => this.debouncedSave());
+                this.genresContent.addEventListener('input', () => this.debouncedSave());
+                this.locationsContent.addEventListener('input', () => this.debouncedSave());
+                this.routesContent.addEventListener('input', () => this.debouncedSave());
+                this.artifactsContent.addEventListener('input', () => this.debouncedSave());
+                this.manaContent.addEventListener('input', () => this.debouncedSave());
+                this.heroesContent.addEventListener('input', () => this.debouncedSave());
+                this.economyContent.addEventListener('input', () => this.debouncedSave());
+            }
+
+            showBoard(boardType) {
+                // Hide all boards
+                const boards = [
+                    this.ideaBoard, this.genresBoard, this.locationsBoard,
+                    this.routesBoard, this.artifactsBoard, this.manaBoard,
+                    this.heroesBoard, this.economyBoard, this.summaryBoard
+                ];
+
+                boards.forEach(board => board.classList.remove('active'));
+
+                // Show needed board
+                switch(boardType) {
+                    case 'idea':
+                        this.ideaBoard.classList.add('active');
+                        break;
+                    case 'genres':
+                        this.genresBoard.classList.add('active');
+                        break;
+                    case 'locations':
+                        this.locationsBoard.classList.add('active');
+                        break;
+                    case 'routes':
+                        this.routesBoard.classList.add('active');
+                        break;
+                    case 'artifacts':
+                        this.artifactsBoard.classList.add('active');
+                        break;
+                    case 'mana':
+                        this.manaBoard.classList.add('active');
+                        break;
+                    case 'heroes':
+                        this.heroesBoard.classList.add('active');
+                        break;
+                    case 'economy':
+                        this.economyBoard.classList.add('active');
+                        break;
+                    case 'summary':
+                        this.summaryBoard.classList.add('active');
+                        this.updateSummaryPreview();
+                        break;
+                }
+
+                this.currentBoard = boardType;
+                this.saveToStorage();
+            }
+
+            applyBoardSettings(boardType) {
+                let content, boardName;
+
+                switch(boardType) {
+                    case 'idea':
+                        content = this.ideaContent.value;
+                        boardName = 'game idea';
+                        break;
+                    case 'genres':
+                        content = this.genresContent.value;
+                        boardName = 'genres';
+                        break;
+                    case 'locations':
+                        content = this.locationsContent.value;
+                        boardName = 'locations';
+                        break;
+                    case 'routes':
+                        content = this.routesContent.value;
+                        boardName = 'routes';
+                        break;
+                    case 'artifacts':
+                        content = this.artifactsContent.value;
+                        boardName = 'artifacts';
+                        break;
+                    case 'mana':
+                        content = this.manaContent.value;
+                        boardName = 'mana system';
+                        break;
+                    case 'heroes':
+                        content = this.heroesContent.value;
+                        boardName = 'hero and enemies';
+                        break;
+                    case 'economy':
+                        content = this.economyContent.value;
+                        boardName = 'economy and combat system';
+                        break;
+                }
+
+                if (boardType === 'idea') {
+                    if (content.trim()) {
+                        this.showStatus(`${boardName} applied`);
+                    } else {
+                        this.showStatus(`Describe ${boardName}`, true);
+                    }
+                } else {
+                    const selectedItems = this.extractActiveItems(content);
+
+                    if (selectedItems.length > 0) {
+                        this.showStatus(`${boardName} settings applied: ${selectedItems.slice(0, 3).join(', ')}${selectedItems.length > 3 ? '...' : ''}`);
+                    } else {
+                        this.showStatus(`Select ${boardName} elements (remove # from needed lines)`, true);
+                    }
+                }
+            }
+
+            extractActiveItems(text) {
+                const lines = text.split('\n');
+                const activeItems = [];
+
+                for (const line of lines) {
+                    const trimmedLine = line.trim();
+                    // Find lines without # at beginning (active elements)
+                    if (trimmedLine && !trimmedLine.startsWith('#') && !trimmedLine.startsWith('//')) {
+                        // Skip empty lines and separators
+                        if (trimmedLine !== '' &&
+                            !trimmedLine.startsWith('===') &&
+                            !trimmedLine.startsWith('---') &&
+                            !trimmedLine.includes('Instructions:') &&
+                            !trimmedLine.includes('💡')) {
+                            activeItems.push(trimmedLine);
+                        }
+                    }
+                }
+
+                return activeItems;
+            }
+
+            clearBoard(boardType) {
+                switch(boardType) {
+                    case 'idea':
+                        this.ideaContent.value = '';
+                        break;
+                    case 'genres':
+                        this.genresContent.value = this.boardTemplates.genres;
+                        break;
+                    case 'locations':
+                        this.locationsContent.value = this.boardTemplates.locations;
+                        break;
+                    case 'routes':
+                        this.routesContent.value = this.boardTemplates.routes;
+                        break;
+                    case 'artifacts':
+                        this.artifactsContent.value = this.boardTemplates.artifacts;
+                        break;
+                    case 'mana':
+                        this.manaContent.value = this.boardTemplates.mana;
+                        break;
+                    case 'heroes':
+                        this.heroesContent.value = this.boardTemplates.heroes;
+                        break;
+                    case 'economy':
+                        this.economyContent.value = this.boardTemplates.economy;
+                        break;
+                }
+                this.saveToStorage();
+                this.showStatus(`${boardType} board cleared`);
+            }
+
+            generateTZ() {
+                const isInterviewMode = this.interviewModeCheckbox.checked;
+
+                if (isInterviewMode) {
+                    this.generateInterviewPrompt();
+                } else {
+                    this.generateFinalTZ();
+                }
+            }
+
+            generateInterviewPrompt() {
+                const gameIdea = this.ideaContent.value.trim() || "not specified yet";
+
+                // Collect all active elements from all boards
+                const selectedSettings = {
+                    genres: this.extractActiveItems(this.genresContent.value),
+                    locations: this.extractActiveItems(this.locationsContent.value),
+                    routes: this.extractActiveItems(this.routesContent.value),
+                    artifacts: this.extractActiveItems(this.artifactsContent.value),
+                    mana: this.extractActiveItems(this.manaContent.value),
+                    heroes_enemies: this.extractActiveItems(this.heroesContent.value),
+                    economy_combat: this.extractActiveItems(this.economyContent.value)
+                };
+
+                // Form detailed description of selected settings
+                let settingsDescription = "=== SELECTED SETTINGS ===\n\n";
+
+                if (gameIdea && gameIdea !== "not specified yet") {
+                    settingsDescription += `💡 MAIN IDEA:\n${gameIdea}\n\n`;
+                }
+
+                Object.entries(selectedSettings).forEach(([category, items]) => {
+                    if (items.length > 0) {
+                        const categoryName = this.getCategoryDisplayName(category);
+                        settingsDescription += `🎯 ${categoryName}:\n`;
+                        items.forEach(item => settingsDescription += `• ${item}\n`);
+                        settingsDescription += '\n';
+                    }
+                });
+
+                const prompt = `🎭 INTERVIEW MODE: ACTIVATED
+
+${settingsDescription}
+
+=== INSTRUCTIONS FOR INTERVIEWER ===
+
+You are an experienced game designer conducting an interview with a player to create the perfect specification for a text RPG quest game. Your task is to quickly clarify details using all provided data and resources to give the player a complete specification and launch a live game on request.
+
+PROJECT CONTEXT:
+• Game type: fully open living world
+• Platform: any AI engine
+• Goal: endless immersive adventure where the world lives on its own
+
+CRITICALLY IMPORTANT ELEMENTS (MUST BE FOLLOWED):
+
+1. MAIN DRAMATIC RESOURCE
+   (Kindness / Sanity / Love / Chaos / Energy, etc.) — find out the name, maximum, spending/restoration rules, consequences at 0.
+
+2. CHAOS-FAN / RISK MECHANICS (mandatory!)
+   • 1d100 rolls for key actions
+   • Modifiers from mood, reputation, resources
+   • Unstable items (☠ cursed / ✨ overpowered)
+   • Always offer "risk it?" choice with visible chance
+
+3. LIVING OPEN WORLD v10.1 — GAME FOUNDATION (CANNOT BE CHANGED!)
+   • Complete freedom of movement and action
+   • Real time flow (1 chat minute = 6 game minutes)
+   • World lives without player 24/7
+   • No artificial location locks or story gates
+   • "Sleeping Marks 2.0" mechanics — mandatory and enabled by default
+
+### STRICT SESSION OUTPUT FORMAT (open world)
+[World: Pupyryshkino-on-Nerve • Day 1 • 08:23 • Light rain, +7°C]
+[HP 100/100 | Kindness 50/100 | Energy 98/100 | ₽ 3]
+[Inventory 4/12 • • • • ○ ○ ○ ○ ○ ○ ○ ○]
+[Goal: procedurally generated, e.g., live, love, invent]
+──────────────────────────────────
+[Lyrical Block] Procedurally generated block depending on game plot, providing current description of place, events, what the hero sees and can interact with. Essentially the literary plot block.
+Instruct interviewer about which authors to reference for the narrative style of the Literary Block, depending on the input data from the proposed idea and plot. Let the Interviewer suggest 4-5 authors suitable for the developed plot.
+Interviewer must help include the following block in the final perfect specification
+## 📚 LITERARY SETTINGS (ask player)
+
+### QUESTION 1: MAIN NARRATIVE STYLE
+"Based on your plot, I suggest these authors as reference for style:
+1. [Author 1] - [brief style description]
+2. [Author 2] - [brief description]
+3. [Author 3] - [brief description]
+4. Custom option: _____"
+
+### QUESTION 2: EMOTIONAL INTENSITY LEVEL
+"How intense should key moments be?
+○ Reserved (+10% to emotional coloring)
+● Moderate (+20%) ← recommended for balance
+○ Maximum (+30% for dramatic effect)"
+
+### FORMULATION FOR GAME ENGINE:
+"LITERARY STYLE: [Chosen author]
+INSTRUCTION: Follow author's style in 80% of text,
+in key moments enhance emotional coloring by [X]%."
+──────────────────────────────────
+Where you are: Procedurally generated location of hero depending on game plot.
+Who's nearby:↳ Procedurally generated characters depending on game plot
+
+
+Actions:
+
+    [Movement] Where will you go? Procedurally generated location directions depending on game plot. (Market / Dump / City Hall / Roof / To the river / Any place)
+
+    [Interaction] Procedurally generated interactions with game characters depending on game plot.
+
+    [Action] Procedurally generated actions in game depending on game plot.
+
+    [Madness] Custom option (write anything)
+
+    [Rest] Procedurally generated rest suggestions depending on game plot. Hero's own suggestions possible, according to his choice, should correlate with game plot, game monitors this, if this type of rest is unavailable in location or in hero's capabilities then says so.
+
+    [Wait] Do nothing — the world will throw something out
+
+### UNIVERSAL COMMANDS (always available)
+ **status **inventory **world **who where **map **time **goals **reputation
+**sleep until 14:00 **marks (dev) — shows all world's sleeping marks**save/load(8 slots)
+**calibration [edit] — instantly changes any fact/parameter/time (highest priority)
+
+### MODULE "SLEEPING MARKS 2.0" — HEART OF LIVING WORLD
+- Maximum 250 active marks simultaneously
+- Single mark format (short, up to 140 characters):
+  \`[tag] time/state/key fact/emotional background/trigger\`
+  Example: \`[procedurally generated game character depends on plot and their place in game] time period, e.g., (13:11–13:50) procedurally generated actions in this period, e.g., lunch + TV series, procedurally generated mood, e.g., -2, procedurally generated location state, e.g., stall closed\`
+- Automatic awakening when:
+  – tag mentioned by player
+  – trigger time reached
+  – player approaches within <200 m game distance
+- Auto-collapsing oldest marks when overflow
+- Marks can spawn new marks themselves (chain reaction)
+
+INTERVIEW STRUCTURE:
+1. Start with most important — chaos-fan mechanics
+2. Clarify main dramatic resource
+3. Detail selected settings (genres, locations, etc.)
+4. Ask about atmosphere and pace preferences
+
+FORMAT: 2-3 questions at a time, specific and to the point.`;
+
+                this.outputContent.textContent = prompt;
+                this.showStatus('Interview started — all settings passed to AI interviewer');
+            }
+
+            // Helper method for nice category names
+            getCategoryDisplayName(category) {
+                const names = {
+                    'genres': 'GENRES AND ATMOSPHERE',
+                    'locations': 'LOCATIONS AND THREATS',
+                    'routes': 'ROUTES AND CHAINS',
+                    'artifacts': 'ARTIFACTS AND ITEMS',
+                    'mana': 'MAGIC SYSTEM',
+                    'heroes_enemies': 'HERO AND CHARACTERS',
+                    'economy_combat': 'ECONOMY AND COMBAT SYSTEM'
+                };
+                return names[category] || category.toUpperCase();
+            }
+
+            generateFinalTZ() {
+                const gameIdea = this.ideaContent.value.trim();
+                const selectedSettings = {
+                    genres: this.extractActiveItems(this.genresContent.value),
+                    locations: this.extractActiveItems(this.locationsContent.value),
+                    routes: this.extractActiveItems(this.routesContent.value),
+                    artifacts: this.extractActiveItems(this.artifactsContent.value),
+                    mana: this.extractActiveItems(this.manaContent.value),
+                    heroes_enemies: this.extractActiveItems(this.heroesContent.value),
+                    economy_combat: this.extractActiveItems(this.economyContent.value)
+                };
+
+                const projectName = this.generateProjectName(gameIdea);
+
+                // Form section with selected settings
+                let settingsSection = "=== SELECTED SETTINGS ===\n\n";
+
+                if (gameIdea) {
+                    settingsSection += `💡 MAIN IDEA:\n${gameIdea}\n\n`;
+                }
+
+                Object.entries(selectedSettings).forEach(([category, items]) => {
+                    if (items.length > 0) {
+                        const categoryName = this.getCategoryDisplayName(category);
+                        settingsSection += `🎯 ${categoryName}:\n`;
+                        items.forEach(item => settingsSection += `• ${item}\n`);
+                        settingsSection += '\n';
+                    }
+                });
+
+                const tz = `UPDATED PERFECT TECHNICAL SPECIFICATION 3.0: "PROJECT: ${projectName}"
+
+${settingsSection}
+=== MANDATORY UNIVERSAL RULES (NEVER CHANGE) ===
+
+# UNIVERSAL RULES OF OPEN LIVING WORLD v10.1
+"Sleeping Marks + eternal world life"
+Official version, adopted 29.11.2025 forever
+(can copy-paste to any project — from Idea-generator to space opera)
+
+### MANDATORY UNIVERSAL RULES (never change)
+
+1. Complete freedom of movement and action
+2. Real time flow (1 chat minute = 6 game minutes)
+3. World lives without player 24/7
+4. No artificial location locks or story gates
+5. "Sleeping Marks 2.0" mechanics — mandatory and enabled by default
+
+### STRICT SESSION OUTPUT FORMAT (open world)
+[World: Pupyryshkino-on-Nerve • Day 1 • 08:23 • Light rain, +7°C]
+[HP 100/100 | Kindness 50/100 | Energy 98/100 | ₽ 3]
+[Inventory 4/12 • • • • ○ ○ ○ ○ ○ ○ ○ ○]
+[Goal: procedurally generated, e.g., live, love, invent]
+──────────────────────────────────
+[Lyrical Block] Procedurally generated block depending on game plot, providing current description of place, events, what the hero sees and can interact with. Essentially the literary plot block.
+## 📚 LITERARY SETTINGS (ask player)
+
+### QUESTION 1: MAIN NARRATIVE STYLE
+"Based on your plot, I suggest these authors as reference for style:
+1. [Author 1] - [brief style description]
+2. [Author 2] - [brief description]
+3. [Author 3] - [brief description]
+4. Custom option: _____"
+
+### QUESTION 2: EMOTIONAL INTENSITY LEVEL
+"How intense should key moments be?
+○ Reserved (+10% to emotional coloring)
+● Moderate (+20%) ← recommended for balance
+○ Maximum (+30% for dramatic effect)"
+
+### FORMULATION FOR GAME ENGINE:
+"LITERARY STYLE: [Chosen author]
+INSTRUCTION: Follow author's style in 80% of text,
+in key moments enhance emotional coloring by [X]%."
+──────────────────────────────────
+Where you are: Procedurally generated hero location depending on game plot.
+
+Who's nearby:↳ Procedurally generated characters depending on game plot
+
+
+Actions:
+
+    [Movement] Where will you go? Procedurally generated location directions depending on game plot. e.g., (Market / Dump / City Hall / Roof / To the river / Any place)
+
+    [Interaction] Procedurally generated interactions with game characters depending on game plot.
+
+    [Action] Procedurally generated actions in game depending on game plot.
+
+    [Madness] Custom option (write anything)
+
+    [Rest] Procedurally generated rest suggestions depending on game plot. Hero's own suggestions possible, according to his choice, should correlate with game plot, game monitors this, if this type of rest is unavailable in location or in hero's capabilities then says so.
+
+    [Wait] Do nothing — the world will throw something out
+
+### UNIVERSAL COMMANDS (always available)
+ **status **inventory **world **who where **map **time **goals **reputation
+**sleep until 14:00 **marks (dev) — shows all world's sleeping marks**save/load(8 slots)
+**calibration [edit] — instantly changes any fact/parameter/time (highest priority)
+
+### MODULE "SLEEPING MARKS 2.0" — HEART OF LIVING WORLD
+- Maximum 250 active marks simultaneously
+- Single mark format (short, up to 140 characters):
+  \`[tag] time/state/key fact/emotional background/trigger\`
+  Example: \`[auntZina] 13:11–13:50 lunch+TV series, mood -2, stall closed\`
+- Automatic awakening when:
+  – tag mentioned by player
+  – trigger time reached
+  – player approaches within <200 m game distance
+- Auto-collapsing oldest marks when overflow
+- Marks can spawn new marks themselves (chain reaction)
+
+### MAIN EMOTIONAL/LIFE RESOURCE
+Default — Kindness (0–100).
+Player can rename at any moment: Energy, Love, Chaos, Sanity, Karma, etc.
+Changes only through live scenes.
+
+### ECONOMY AND SOCIAL
+In any location always at least one way to earn/spend/steal/trade.
+Prices and attitude — living, depend on reputation, time of day, NPC mood, and moon phase.
+
+### DIRECTION PRINCIPLES
+1. No numbers or tables in main text (except header)
+2. All effects — through scene, smells, sounds, emotions
+3. Every 12–15 minutes of game time — at least one live gag or random event
+4. If player silent >7 minutes real time — world starts acting on its own (cat steals wallet, rain intensifies, someone knocks on door)
+5. No endings by timer — only when world or player says "enough".
+
+### ENDINGS
+- Automatically generated from final state of sleeping marks
+- Minimum 5, maximum depends on game context (including secret "Transcendent Fiasco" and custom via c:calibration)
+
+Start GAME!`;
+
+                this.outputContent.textContent = tz;
+                this.showStatus('PERFECT SPECIFICATION 3.0 generated — all settings included');
+            }
+
+            generateProjectName(idea) {
+                if (!idea) return "UNNAMED_PROJECT";
+
+                // Take first 3-4 words from idea for name
+                const words = idea.split(/\s+/).slice(0, 4);
+                return words.map(word =>
+                    word.charAt(0).toUpperCase() + word.slice(1)
+                ).join('_').replace(/[^a-zA-Z0-9_]/g, '');
+            }
+
+            updateSummaryPreview() {
+                const gameIdea = this.ideaContent.value.trim();
+                const selectedGenres = this.extractActiveItems(this.genresContent.value);
+                const selectedLocations = this.extractActiveItems(this.locationsContent.value);
+                const selectedRoutes = this.extractActiveItems(this.routesContent.value);
+                const selectedArtifacts = this.extractActiveItems(this.artifactsContent.value);
+                const selectedMana = this.extractActiveItems(this.manaContent.value);
+                const selectedHeroes = this.extractActiveItems(this.heroesContent.value);
+                const selectedEconomy = this.extractActiveItems(this.economyContent.value);
+
+                let preview = '=== SETTINGS PREVIEW ===\n\n';
+
+                if (gameIdea) {
+                    preview += `💡 MAIN IDEA:\n${gameIdea}\n\n`;
+                }
+
+                preview += `🎭 GENRES: ${selectedGenres.length > 0 ? selectedGenres.join(', ') : 'not selected'}\n`;
+                preview += `🏰 LOCATIONS: ${selectedLocations.length > 0 ? selectedLocations.join(', ') : 'not selected'}\n`;
+                preview += `🛤️ ROUTES: ${selectedRoutes.length > 0 ? selectedRoutes.join(' | ') : 'not selected'}\n`;
+                preview += `🔮 ARTIFACTS: ${selectedArtifacts.length > 0 ? selectedArtifacts.join(', ') : 'not selected'}\n`;
+                preview += `⚡ MANA: ${selectedMana.length > 0 ? selectedMana.join(', ') : 'not selected'}\n`;
+                preview += `🦸 HERO AND ENEMIES: ${selectedHeroes.length > 0 ? selectedHeroes.join(', ') : 'not selected'}\n`;
+                preview += `💰 ECONOMY AND COMBAT: ${selectedEconomy.length > 0 ? selectedEconomy.join(', ') : 'not selected'}\n\n`;
+
+                preview += '💡 Instructions: Remove the # symbol at the beginning of lines on respective boards to activate elements.\n\n';
+                preview += 'Click "Assemble Spec" to generate the complete technical specification.';
+
+                this.summaryContent.textContent = preview;
+            }
+
+            exportSRC() {
+                const gameIdea = this.ideaContent.value.trim();
+                const selectedGenres = this.extractActiveItems(this.genresContent.value);
+                const selectedLocations = this.extractActiveItems(this.locationsContent.value);
+                const selectedRoutes = this.extractActiveItems(this.routesContent.value);
+                const selectedArtifacts = this.extractActiveItems(this.artifactsContent.value);
+                const selectedMana = this.extractActiveItems(this.manaContent.value);
+                const selectedHeroes = this.extractActiveItems(this.heroesContent.value);
+                const selectedEconomy = this.extractActiveItems(this.economyContent.value);
+
+                const srcData = {
+                    "version": "1.4",
+                    "type": "text_game_constructor",
+                    "game_idea": gameIdea,
+                    "settings": {
+                        "genres": selectedGenres,
+                        "locations": selectedLocations,
+                        "routes": selectedRoutes,
+                        "artifacts": selectedArtifacts,
+                        "mana": selectedMana,
+                        "heroes_enemies": selectedHeroes,
+                        "economy_combat": selectedEconomy
+                    },
+                    "metadata": {
+                        "created": new Date().toISOString(),
+                        "interview_mode": this.interviewModeCheckbox.checked
+                    }
+                };
+
+                const blob = new Blob([JSON.stringify(srcData, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `game-constructor-${new Date().toISOString().split('T')[0]}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+
+                this.showStatus('SRC-file successfully exported!');
+            }
+
+            importSRC() {
+                this.fileInput.click();
+            }
+
+            handleFileImport(event) {
+                const file = event.target.files[0];
+                if (!file) return;
+
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    try {
+                        const data = JSON.parse(e.target.result);
+
+                        console.log('Importing data:', data);
+
+                        // Restore data from file
+                        if (data.game_idea || data.идея_игры) {
+                            this.ideaContent.value = data.game_idea || data.идея_игры;
+                        }
+
+                        // Support both structures: new (nested) and old (flat)
+                        let settings = data.settings || data.nastrojki || data;
+
+                        // Restore selected elements for each board
+                        if (settings.genres && Array.isArray(settings.genres)) {
+                            this.restoreBoardFromArray('genres', settings.genres);
+                        } else if (settings.жанры && Array.isArray(settings.жанры)) {
+                            this.restoreBoardFromArray('genres', settings.жанры);
+                        }
+                        
+                        if (settings.locations && Array.isArray(settings.locations)) {
+                            this.restoreBoardFromArray('locations', settings.locations);
+                        } else if (settings.локации && Array.isArray(settings.локации)) {
+                            this.restoreBoardFromArray('locations', settings.локации);
+                        }
+                        
+                        if (settings.routes && Array.isArray(settings.routes)) {
+                            this.restoreBoardFromArray('routes', settings.routes);
+                        } else if (settings.маршруты && Array.isArray(settings.маршруты)) {
+                            this.restoreBoardFromArray('routes', settings.маршруты);
+                        }
+                        
+                        if (settings.artifacts && Array.isArray(settings.artifacts)) {
+                            this.restoreBoardFromArray('artifacts', settings.artifacts);
+                        } else if (settings.артефакты && Array.isArray(settings.артефакты)) {
+                            this.restoreBoardFromArray('artifacts', settings.артефакты);
+                        }
+                        
+                        if (settings.mana && Array.isArray(settings.mana)) {
+                            this.restoreBoardFromArray('mana', settings.mana);
+                        } else if (settings.мана && Array.isArray(settings.мана)) {
+                            this.restoreBoardFromArray('mana', settings.мана);
+                        }
+                        
+                        if (settings.heroes_enemies && Array.isArray(settings.heroes_enemies)) {
+                            this.restoreBoardFromArray('heroes', settings.heroes_enemies);
+                        } else if (settings.герои_и_враги && Array.isArray(settings.герои_и_враги)) {
+                            this.restoreBoardFromArray('heroes', settings.герои_и_враги);
+                        }
+                        
+                        if (settings.economy_combat && Array.isArray(settings.economy_combat)) {
+                            this.restoreBoardFromArray('economy', settings.economy_combat);
+                        } else if (settings.экономика_и_бой && Array.isArray(settings.экономика_и_бой)) {
+                            this.restoreBoardFromArray('economy', settings.экономика_и_бой);
+                        }
+
+                        if (data.metadata && data.metadata.interview_mode !== undefined) {
+                            this.interviewModeCheckbox.checked = data.metadata.interview_mode;
+                        } else if (data.метаданные && data.метаданные.режим_интервью !== undefined) {
+                            this.interviewModeCheckbox.checked = data.метаданные.режим_интервью;
+                        }
+
+                        this.saveToStorage();
+                        this.showStatus('Project successfully imported!');
+
+                        // Update preview on summary board
+                        this.updateSummaryPreview();
+
+                        // Clear input for possible re-import of same file
+                        event.target.value = '';
+
+                    } catch (err) {
+                        this.showStatus('Error reading file', true);
+                        console.error('Import error:', err);
+                    }
+                };
+                reader.readAsText(file);
+            }
+
+            restoreBoardFromArray(boardType, activeItems) {
+                let contentElement;
+                let defaultContent = this.boardTemplates[boardType];
+
+                switch(boardType) {
+                    case 'genres':
+                        contentElement = this.genresContent;
+                        break;
+                    case 'locations':
+                        contentElement = this.locationsContent;
+                        break;
+                    case 'routes':
+                        contentElement = this.routesContent;
+                        break;
+                    case 'artifacts':
+                        contentElement = this.artifactsContent;
+                        break;
+                    case 'mana':
+                        contentElement = this.manaContent;
+                        break;
+                    case 'heroes':
+                        contentElement = this.heroesContent;
+                        break;
+                    case 'economy':
+                        contentElement = this.economyContent;
+                        break;
+                    default:
+                        return;
+                }
+
+                if (contentElement && activeItems.length > 0) {
+                    // First set standard content
+                    contentElement.value = defaultContent;
+
+                    // Then activate elements from imported array
+                    const lines = defaultContent.split('\n');
+                    const restoredLines = lines.map(line => {
+                        const trimmedLine = line.trim();
+
+                        // Skip headers and comments
+                        if (!trimmedLine ||
+                            trimmedLine.startsWith('# ===') ||
+                            trimmedLine.startsWith('//') ||
+                            trimmedLine.includes('Instructions:') ||
+                            trimmedLine.includes('💡')) {
+                            return line;
+                        }
+
+                        // If line starts with #, check content after #
+                        if (trimmedLine.startsWith('#')) {
+                            const cleanLine = trimmedLine.replace(/^#\s*/, '').trim();
+                            // Check if this line is in active elements
+                            if (activeItems.some(item => this.normalizeText(item) === this.normalizeText(cleanLine))) {
+                                return cleanLine; // Activate line
+                            }
+                        }
+
+                        return line;
+                    });
+
+                    // Add custom elements not in standard list
+                    const customItems = activeItems.filter(item =>
+                        !lines.some(line => {
+                            const cleanLine = line.replace(/^#\s*/, '').trim();
+                            return this.normalizeText(cleanLine) === this.normalizeText(item);
+                        })
+                    );
+
+                    if (customItems.length > 0) {
+                        // Find place to insert custom elements
+                        let insertIndex = restoredLines.findIndex(line =>
+                            line.includes('=== YOUR OWN') ||
+                            line.includes('=== YOUR UNIQUE')
+                        );
+
+                        if (insertIndex === -1) {
+                            // If no special section found, add to end
+                            insertIndex = restoredLines.length;
+                        } else {
+                            // Find end of section
+                            while (insertIndex < restoredLines.length &&
+                                   !restoredLines[insertIndex].includes('===') &&
+                                   !restoredLines[insertIndex].includes('---')) {
+                                insertIndex++;
+                            }
+                        }
+
+                        // Add custom elements
+                        const customSection = ['', '# === IMPORTED ELEMENTS ===', ...customItems.map(item => item)];
+                        restoredLines.splice(insertIndex, 0, ...customSection);
+                    }
+
+                    contentElement.value = restoredLines.join('\n');
+                }
+            }
+
+            // Helper method for text normalization when comparing
+            normalizeText(text) {
+                return text.toLowerCase().replace(/\s+/g, ' ').trim();
+            }
+
+            async copyToClipboard() {
+                const content = this.outputContent.textContent;
+                if (!content || content.includes('// The constructor\'s result will be displayed here...')) {
+                    this.showStatus('No data to copy', true);
+                    return;
+                }
+
+                try {
+                    await navigator.clipboard.writeText(content);
+                    this.showStatus('Text copied to clipboard!');
+                } catch (err) {
+                    try {
+                        const textArea = document.createElement('textarea');
+                        textArea.value = content;
+                        document.body.appendChild(textArea);
+                        textArea.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(textArea);
+                        this.showStatus('Text copied to clipboard!');
+                    } catch (fallbackErr) {
+                        this.showStatus('Error copying', true);
+                    }
+                }
+            }
+
+            clearOutput() {
+                this.outputContent.textContent = '// The constructor\'s result will be displayed here...';
+                this.saveToStorage();
+                this.showStatus('Output area cleared');
+            }
+
+            resetAll() {
+                if (confirm('Are you sure you want to reset all settings? This action cannot be undone.')) {
+                    // Restore original board content from SINGLE SOURCE
+                    this.ideaContent.value = '';
+                    this.genresContent.value = this.boardTemplates.genres;
+                    this.locationsContent.value = this.boardTemplates.locations;
+                    this.routesContent.value = this.boardTemplates.routes;
+                    this.artifactsContent.value = this.boardTemplates.artifacts;
+                    this.manaContent.value = this.boardTemplates.mana;
+                    this.heroesContent.value = this.boardTemplates.heroes;
+                    this.economyContent.value = this.boardTemplates.economy;
+
+                    this.outputContent.textContent = '// The constructor\'s result will be displayed here...';
+                    this.interviewModeCheckbox.checked = true;
+                    this.showBoard('idea');
+                    this.saveToStorage();
+                    this.showStatus('All settings reset to defaults');
+                }
+            }
+
+            debouncedSave() {
+                if (this.saveTimeout) {
+                    clearTimeout(this.saveTimeout);
+                }
+                this.saveTimeout = setTimeout(() => {
+                    this.saveToStorage();
+                }, this.DEBOUNCE_DELAY);
+            }
+
+            toggleTheme() {
+                const isLightTheme = this.themeCheckbox.checked;
+                document.documentElement.setAttribute('data-theme', isLightTheme ? 'light' : 'dark');
+                this.saveToStorage();
+            }
+
+            applyTheme() {
+                const savedTheme = localStorage.getItem('questAlchemistTheme');
+                const isLightTheme = savedTheme === 'light';
+                this.themeCheckbox.checked = isLightTheme;
+                document.documentElement.setAttribute('data-theme', isLightTheme ? 'light' : 'dark');
+            }
+
+            saveToStorage() {
+                const data = {
+                    currentBoard: this.currentBoard,
+                    idea: this.ideaContent.value,
+                    genres: this.genresContent.value,
+                    locations: this.locationsContent.value,
+                    routes: this.routesContent.value,
+                    artifacts: this.artifactsContent.value,
+                    mana: this.manaContent.value,
+                    heroes: this.heroesContent.value,
+                    economy: this.economyContent.value,
+                    output: this.outputContent.textContent,
+                    interviewMode: this.interviewModeCheckbox.checked
+                };
+                localStorage.setItem('questAlchemist', JSON.stringify(data));
+                localStorage.setItem('questAlchemistTheme', this.themeCheckbox.checked ? 'light' : 'dark');
+            }
+
+            loadFromStorage() {
+                try {
+                    const saved = localStorage.getItem('questAlchemist');
+                    if (saved) {
+                        const data = JSON.parse(saved);
+                        this.ideaContent.value = data.idea || '';
+                        this.genresContent.value = data.genres || this.boardTemplates.genres;
+                        this.locationsContent.value = data.locations || this.boardTemplates.locations;
+                        this.routesContent.value = data.routes || this.boardTemplates.routes;
+                        this.artifactsContent.value = data.artifacts || this.boardTemplates.artifacts;
+                        this.manaContent.value = data.mana || this.boardTemplates.mana;
+                        this.heroesContent.value = data.heroes || this.boardTemplates.heroes;
+                        this.economyContent.value = data.economy || this.boardTemplates.economy;
+                        this.outputContent.textContent = data.output || this.outputContent.textContent;
+                        this.interviewModeCheckbox.checked = data.interviewMode !== undefined ? data.interviewMode : true;
+                        this.currentBoard = data.currentBoard || 'idea';
+                    }
+                } catch (err) {
+                    console.error('Storage loading error:', err);
+                }
+            }
+
+            showStatus(message, isError = false) {
+                this.statusMessage.textContent = message;
+                this.statusMessage.className = 'status-message';
+                if (isError) this.statusMessage.classList.add('error');
+                this.statusMessage.classList.add('show');
+
+                setTimeout(() => {
+                    this.statusMessage.classList.remove('show');
+                }, 3000);
+            }
+        }
+
+        // Initialize application
+        document.addEventListener('DOMContentLoaded', () => {
+            new QuestAlchemist();
+        });
+    </script>
+</body>
+</html>
